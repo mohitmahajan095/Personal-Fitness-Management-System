@@ -1,6 +1,5 @@
 # Personal Fitness Management System
 
-**Project Introduction** 
 The Personalised Fitness Management System (unique to the user) aims to address the growing need for efficient management of personal fitness routines and health data. With the rise of health consciousness and the adoption of fitness activities, individuals often struggle to organize and track their fitness goals, routines, and progress effectively. This system will provide a comprehensive solution to manage fitness data efficiently, helping users monitor their progress and achieve their health objectives more effectively.
 
 **Objectives:**
