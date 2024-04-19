@@ -1,17 +1,14 @@
-import pyodbc
 import customtkinter as ctk
-import serverLogin
 from bmain import sqlserver
 import bmain
 import in_profile
 from PIL import Image, ImageTk
-import time
 import os
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
-IMAGE_PATH  = r"D:\My_Learnings\University Stuff\4th Semester\Database System [DBS]\Minor Project Files\img"
+IMAGE_PATH = os.path.dirname(__file__)
 
 def main_page():
     app = ctk.CTk()
@@ -19,11 +16,9 @@ def main_page():
     app.geometry("800x500")
 
     mssql = bmain.SQLManager()
-    # sqlserver = sqlserver.connect()
-    # sqlserver.autocommit = True
 
     # Side Image
-    picture = ctk.CTkImage(dark_image= Image.open(os.path.join(IMAGE_PATH + "\login_picture.png")) , size=(425,500))
+    picture = ctk.CTkImage(dark_image= Image.open(os.path.join(IMAGE_PATH + "\img\login_picture.png")) , size=(425,500))
     pic_lable = ctk.CTkLabel(app, text="", image=picture)
     pic_lable.place(relx=0, rely= 0)
 
