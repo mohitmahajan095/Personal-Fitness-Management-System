@@ -1,4 +1,5 @@
 import serverLogin
+
 sqlserver = serverLogin.connect()
 sqlserver.autocommit = True
 sqlserver = sqlserver.cursor()
@@ -143,7 +144,7 @@ class feature:
 
 ####################################################################################################################################################################
 # mssql_ = sql()
-# mssql_.register_user(username="mahadev", password="user123", email="mahadev@email.com", dob="2004-04-12", age=20, gender="Male", weight=64, height=183, user_type="User")
+# mssql_.register_user(username="mohit", password="aws555", email="mohit@email.com", dob="2004-02-09", age=20, gender="Male", weight=57, height=183, user_type="User")
 # mssql_.login_user(in_username, in_password)
 # ab = sql()
 # # a,b,c,d,e,f,g,h,i,j = ab.profile_details("mohitmahajan")
