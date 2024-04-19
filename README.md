@@ -1,7 +1,7 @@
 
 # Personal Fitness Management System
 
-https://github.com/mohitmahajan095/Personal-Fitness-Management-System/blob/42f3bfe7f9fffe4c7d0e4c4465bad283c6151e77/Minor%20Project%20Files/img/home_3.png
+![ezgif-3-2bb9aceb35](https://github.com/mohitmahajan095/Personal-Fitness-Management-System/blob/42f3bfe7f9fffe4c7d0e4c4465bad283c6151e77/Minor%20Project%20Files/img/home_3.png)
 
 The Personalised Fitness Management System (unique to the user) aims to address the growing need for efficient management of personal fitness routines and health data. With the rise of health consciousness and the adoption of fitness activities, individuals often struggle to organize and track their fitness goals, routines, and progress effectively. This system will provide a comprehensive solution to manage fitness data efficiently, helping users monitor their progress and achieve their health objectives more effectively.
 
