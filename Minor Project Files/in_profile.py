@@ -1,11 +1,9 @@
-import pyodbc
 import customtkinter as ctk
 from CTkTable import CTkTable
-import serverLogin
 import bmain
 from PIL import Image, ImageTk
-import ttkbootstrap
 import datetime
+import os
 
 # Theme 
 # c1 = "#181c1c"
@@ -25,13 +23,13 @@ def successful_login(username, password, user_id):
     
     weight, height, age, gender = bmain.feature.get_w_h_a_g(username=username)    # To get weight, height, age & gender of user from database
     
-    IMAGE_PATH  = r"D:\My_Learnings\University Stuff\4th Semester\Database System [DBS]\Minor Project Files\img"
+    IMAGE_PATH = os.path.dirname(__file__)
 
     # Left Frame (Buttons Frame)
     side_frame = ctk.CTkFrame(master=main_frame,height=1000, width=250, bg_color="#0c0e12", fg_color="#0c0e12", corner_radius=0)
     side_frame.place(relx=0,rely=0)
 
-    app_icon = ctk.CTkImage(dark_image=Image.open(IMAGE_PATH  + "\home_3.png"), size=(250,99.5))
+    app_icon = ctk.CTkImage(dark_image=Image.open(IMAGE_PATH  + "\img\home_3.png"), size=(250,99.5))
     _icon_lable = ctk.CTkLabel(master=side_frame, text="",image=app_icon)
     _icon_lable.place(relx=0, rely=0.0)
 
@@ -254,7 +252,7 @@ def successful_login(username, password, user_id):
         c = user_info[1]
         char = c[0]
         get_char = char.upper()
-        profile_pic = ctk.CTkImage(dark_image=Image.open(IMAGE_PATH + "\profile_pic.png"), size=(207,211))
+        profile_pic = ctk.CTkImage(dark_image=Image.open(IMAGE_PATH + "\img\profile_pic.png"), size=(207,211))
         profile_icon = ctk.CTkLabel(master=gp_additional_frame, text=f"{get_char}", font=("Berlin Sans FB Demi", 110),image=profile_pic)
         profile_icon.place(relx=0.66, rely=0.13)
 
@@ -349,8 +347,6 @@ def successful_login(username, password, user_id):
                                           text="Logout",command=logout, height=50, width=245, bg_color="#0c0e12",
                                           fg_color="transparent", corner_radius=10, font=(button_font_family, 20))
     logout_button.place(relx=0.012, rely=0.7)
-
-    # frame_colour = "#30343c"
     
     # Default Page (--->> Home Page)
     goto_home()
