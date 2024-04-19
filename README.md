@@ -12,6 +12,6 @@ The Personalised Fitness Management System (unique to the user) aims to address 
 **Technologies/Frameworks:**
 1.	**Database Management System:** MySQL
 2.	**Programming Language:** Python
-3.	**Frontend Development (GUI):** Python [thinker & customtkinter]
-4.	**Backend Development:** Python [pyodbc]
+3.	**Frontend Development (GUI):** Python (thinker & customtkinter)
+4.	**Backend Development:** Python (pyodbc)
 5.	**Server Hosting:** Microsoft SQL Server 2014
