@@ -13,6 +13,7 @@ import os
 def successful_login(username, password, user_id):
  
     ms_sql = bmain.SQLManager()
+    features = bmain.feature()
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("blue")
     
@@ -22,9 +23,10 @@ def successful_login(username, password, user_id):
     button_font_family = "Mangal (Headings CS)"
     
     weight, height, age, gender = bmain.feature.get_w_h_a_g(username=username)    # To get weight, height, age & gender of user from database
+    todays_date = str(datetime.date.today())
     
     IMAGE_PATH = os.path.dirname(__file__)
-
+    
     # Left Frame (Buttons Frame)
     side_frame = ctk.CTkFrame(master=main_frame,height=1000, width=250, bg_color="#0c0e12", fg_color="#0c0e12", corner_radius=0)
     side_frame.place(relx=0,rely=0)
@@ -62,7 +64,7 @@ def successful_login(username, password, user_id):
         label_bmr_m = ctk.CTkLabel(home_additional_frame, text=f"* Your BMR is {bmr} Calories/day", font=("Berlin Sans FB", 25), width=0, fg_color="transparent", bg_color="transparent")
         label_bmr_m.place(relx=0.04, rely=0.28)
 
-        label_maintenance_cal = ctk.CTkLabel(home_additional_frame, text=f"* Your Maintenance Kcal are {maintenance_cal}/day", font=("Berlin Sans FB", 25), width=0, fg_color="transparent", bg_color="transparent")
+        label_maintenance_cal = ctk.CTkLabel(home_additional_frame, text=f"* Your Maintenance calories are {maintenance_cal}/day", font=("Berlin Sans FB", 25), width=0, fg_color="transparent", bg_color="transparent")
         label_maintenance_cal.place(relx=0.04, rely=0.46)
 
         fat_percentage = bmain.feature.calculate_body_fat_percentage(weight, height, age, gender)
@@ -86,22 +88,34 @@ def successful_login(username, password, user_id):
         cal_intake_bar = ctk.CTkProgressBar(home_additional_frame_2 ,orientation="horizontal", height=20, width=550, determinate_speed=.05211047)
         cal_intake_bar.place(relx=0.05, rely=0.38)
         
-        total_cal_intake = 959                                                 # To Do: Connect to bmain sql track_food_intake() function
+        total_cal_intake = features.total_calories_consumed(user_id, todays_date)                                                 # ToDo: Connect to bmain sql track_food_intake() function
+        # print(total_cal_intake)
         per_percent_cal = round(float(total_cal_intake*(1/maintenance_cal)), 2)
         cal_intake_bar.set(per_percent_cal)
+
+        in_text_cal_intake = ctk.CTkLabel(home_additional_frame_2, text=f"{total_cal_intake} / {maintenance_cal}", font=("Berlin Sans FB", 25), width=0, fg_color="transparent", bg_color="transparent")
+        in_text_cal_intake.place(relx=0.82, rely=0.367)
 
         label_cal_burned = ctk.CTkLabel(home_additional_frame_2, text=f"Calories Burned :", font=("Berlin Sans FB", 22), width=0, fg_color="transparent", bg_color="transparent")
         label_cal_burned.place(relx=0.05, rely=0.58)
         cal_burned_bar = ctk.CTkProgressBar(home_additional_frame_2 ,orientation="horizontal", height=20, width=550, determinate_speed=.05211047)
         cal_burned_bar.place(relx=0.05, rely=0.71)
+
         cal_burned_bar.set(0)
 
-
-        total_cal_burned = 959                                                 # To Do: Connect to bmain sql track_fitness_activity() function
+        total_cal_burned = features.total_calories_burned(user_id, todays_date)                                                 # ToDo: Connect to bmain sql track_fitness_activity() function
+        # print(total_cal_burned)
         per_percent_burned = round(float(total_cal_burned*(1/2500)), 2)
-        print(per_percent_burned)
+        # print(per_percent_burned)
         cal_burned_bar.set(per_percent_burned)
 
+        if gender == 'Male':
+            req_cal_burned = 2500
+        elif gender == 'Female':
+            req_cal_burned = 2000
+
+        in_text_cal_burned = ctk.CTkLabel(home_additional_frame_2, text=f"{total_cal_burned} / { req_cal_burned}", font=("Berlin Sans FB", 25), width=0, fg_color="transparent", bg_color="transparent")
+        in_text_cal_burned.place(relx=0.82, rely=0.692)
 
 
     # Activity Button Action
@@ -143,22 +157,23 @@ def successful_login(username, password, user_id):
 
 
         def ft_send_data():
-            ms_sql.track_fitness_activity(activity_type=activity_type.get(), duration=ft_duration.get(), user_id=user_id, date=current_weight.get(), calories_burned=206)
             met_level = str(MET_level.get())
-            weight = int(current_weight.get())
+            weight_now = int(current_weight.get())
             duration = int(ft_duration.get())
+            in_activity = str(activity_type.get())
             
-            if  activity_type.get() == "Cycling":
-                kcalburned = bmain.feature.cal_burned_by_cycling(met_level=met_level, weight=weight, duration=duration)
-            elif activity_type.get() == "Running":
-                print("Helloooo you just came form running !")
+            if in_activity == "Cycling":
+                calburned = features.cal_burned_by_cycling(met_level=met_level, weight=weight, duration=duration)
 
-            ft_table.insert(row=1, column=0, value=user_id)
-            ft_table.insert(row=1, column=1, value=activity_type.get())
-            ft_table.insert(row=1, column=2, value=ft_duration.get())
-            ft_table.insert(row=1, column=3, value=round(kcalburned))
-            ft_table.insert(row=1, column=4, value=current_weight.get())
-            ft_table.insert(row=1, column=5, value=datetime.date.today())
+            elif in_activity == "Running":
+                calburned = features.cal_burned_by_running(speed_level=met_level, weight=weight, duration=duration)
+
+            # print(type(user_id), type(activity_type.get()), type(duration), type(calburned), type(weight_now), type(weight)) 
+
+            ms_sql.track_fitness_activity(UserID=user_id, activity=in_activity , duration=duration, calories_burned=calburned, current_weight=weight_now, previous_weight=weight)
+            ms_sql.update_weight(weight_now, user_id)
+
+            fitness_activities()
 
         ft_submit_button = ctk.CTkButton(ft_additional_frame, text="Submit", height=35, width=180,corner_radius=10, command=ft_send_data)
         ft_submit_button.place(relx=0.37, rely=0.8)
@@ -167,11 +182,19 @@ def successful_login(username, password, user_id):
         ft_additional_frame_2 = ctk.CTkFrame(master=ft_frame, height=256.5, width=735, bg_color="transparent", fg_color="#15181e", corner_radius=30, border_color="#15181e", border_width=1)
         ft_additional_frame_2.place(relx=0.011,rely=0.49)
 
-        ft_table = CTkTable(master=ft_additional_frame_2, row=6, column=6, justify="center", width=114, font=("Berlin Sans FB", 15), colors=("#2f3333", "#464949"))
+        ft_table = CTkTable(master=ft_additional_frame_2, row=1, column=7, justify="center", width=97, font=("Berlin Sans FB", 14), colors=("#2f3333", "#464949"))
         ft_table.pack(expand=True, fill="both", padx=20, pady=20)
-        ft_table.add_row(index=0,values=("UserID", "Activity Type","Duration (mins)","Kcal Burned","Today's Weight","Date"))
+        
+        def generate_ft_activity_table():
+            ft_table_data = ms_sql.in_fitness_activity_table(user_id)
+            print(ft_table_data)
+            for i in range(0, len(ft_table_data)):
+                ft_table.add_row(index=i+1,values= ft_table_data[i][1:])
 
-
+        ft_column_list = ["UserID", "Activity", "Duration", "Calories Burned", "Current Weight", "Previous Weight", "Date"]
+        for i in range(0, len(ft_column_list)):
+            ft_table.insert(row=0, column=i, value=ft_column_list[i])
+        generate_ft_activity_table()
 
     # Food Intake Button Action
     def food_intake():
@@ -202,20 +225,20 @@ def successful_login(username, password, user_id):
                                    text_color="white", border_color="#0c0e12", corner_radius=10)
         food_quantity.place(relx=0.1, rely=0.55)
 
-        calories_per_qty = ctk.CTkEntry(fi_additional_frame, placeholder_text="Enter per plate calories", height=35, width=280,
+        calories_per_serving = ctk.CTkEntry(fi_additional_frame, placeholder_text="Enter Calories per serving", height=35, width=280,
                                    border_width=1.5, bg_color="transparent", fg_color="#0c0e12",
                                    text_color="white", border_color="#0c0e12", corner_radius=10)
-        calories_per_qty.place(relx=0.52, rely=0.55)
-
+        calories_per_serving.place(relx=0.52, rely=0.55)
+        
         def fi_send_data():
 
-            fi_table.insert(row=1, column=0, value=user_id)
-            fi_table.insert(row=1, column=1, value=food_name.get())
-            fi_table.insert(row=1, column=2, value=food_quantity.get())
-            fi_table.insert(row=1, column=3, value=calories_per_qty.get())
-            fi_table.insert(row=1, column=4, value=fi_meal_time.get())
-            fi_table.insert(row=1, column=5, value=datetime.date.today())
+            send_food_name = str(food_name.get())
+            send_quantity = int(food_quantity.get())
+            send_CaloriesPerServing= int(calories_per_serving.get())
+            send_meal_time = str(fi_meal_time.get())
 
+            ms_sql.track_food_intake(UserID=user_id, food_name=send_food_name, quantity=send_quantity, CaloriesPerServing=send_CaloriesPerServing, meal_time=send_meal_time, date=todays_date)
+            food_intake()
 
         fi_submit_button = ctk.CTkButton(fi_additional_frame, text="Submit", height=35, width=180,corner_radius=10, command=fi_send_data)
         fi_submit_button.place(relx=0.37, rely=0.8)
@@ -224,9 +247,21 @@ def successful_login(username, password, user_id):
         fi_additional_frame_2 = ctk.CTkFrame(master=fi_frame, height=256.5, width=735, bg_color="transparent", fg_color="#15181e", corner_radius=30, border_color="#15181e", border_width=1)
         fi_additional_frame_2.place(relx=0.011,rely=0.49)
 
-        fi_table = CTkTable(master=fi_additional_frame_2, row=6, column=6, justify="center", width=114, font=("Berlin Sans FB", 15), colors=("#2f3333", "#464949"))
+        # Generate Table (Food-Intake History)
+        def generate_fi_table():
+            table_data = ms_sql.in_food_intake_table(user_id)
+            for i in range(0, len(table_data)):
+                fi_table.add_row(index=i+1,values= table_data[i])
+
+        fi_table = CTkTable(master=fi_additional_frame_2, row=1, column=6, justify="center", width=114, font=("Berlin Sans FB", 15), colors=("#2f3333", "#464949"))
         fi_table.pack(expand=True, fill="both", padx=20, pady=20)
-        fi_table.add_row(index=0,values=("UserID", "Food","Quantity","Calories Intake", "Meal Time", "Date"))
+        
+        # Generate Column Row
+        fi_column_list = ["UserID", "Food", "Quantity", "Calories Intake", "Meal Time", "Date"] 
+        for i in range(0, len(fi_column_list)):
+            fi_table.insert(row=0, column=i, value=fi_column_list[i])
+
+        generate_fi_table()
 
 
 
@@ -307,9 +342,42 @@ def successful_login(username, password, user_id):
         delete_acc_label = ctk.CTkLabel(settings_additional_frame, text=f"Delete your account : ", font=("Berlin Sans FB", 25), width=0, fg_color="transparent", bg_color="transparent")
         delete_acc_label.place(relx=0.045, rely=0.3)
 
-        def delete_acc():
-            pass
-        delete_acc_button = ctk.CTkButton(settings_additional_frame, text="Delete Account", height=35, width=180, corner_radius=30, command=delete_acc, fg_color="#F45850", hover_color="#C34640")
+        def ask_conformation_delete_acc():
+                conformation_tab = ctk.CTk()
+                conformation_tab.title(f"Really wanna say good bye {username} ?")
+                conformation_tab.geometry("500x300")
+                
+                conformation_bg_frame = ctk.CTkFrame(master=conformation_tab, height=270, width=460, bg_color="transparent", fg_color="#15181e",
+                                                 corner_radius=30, border_color="#15181e", border_width=1)
+                conformation_bg_frame.place(relx=0.04,rely=0.05)
+
+                warning_label = ctk.CTkLabel(conformation_bg_frame, text=f"This will delete your account \n& all your data ", font=("Berlin Sans FB", 23), width=0, fg_color="transparent", bg_color="transparent")
+                warning_label.place(relx=0.19, rely=0.45)
+
+
+                warning_icon_lable = ctk.CTkLabel(master=conformation_bg_frame, text="WARNING !", text_color="red", font=("Mangal (Headings CS)", 35), width=0)
+                warning_icon_lable.place(relx=0.3, rely=0.2)
+
+                def delete_acc():
+                        ms_sql.delete_user_acc(user_id=user_id)
+                        main_frame.destroy()
+                    
+                def cancel():
+                        conformation_tab.destroy()
+                    
+                confirm_button = ctk.CTkButton(master=conformation_bg_frame, text_color=("white", "white"), hover_color=("#20242c", "#C34640"),
+                                                      text="Delete Account",command=delete_acc, height=50, width=187.5, bg_color="transparent",
+                                                      fg_color="#0c0e12", corner_radius=20, font=("Mangal (Headings CS)", 20))
+                confirm_button.place(relx=0.531, rely=0.76)
+
+                cancel_button = ctk.CTkButton(master=conformation_bg_frame, text_color=("white", "white"), hover_color=("#20242c", "#20242c"),
+                                                      text="Cancel",command=cancel, height=50, width=187.5, bg_color="transparent",
+                                                      fg_color="#0c0e12", corner_radius=20, font=("Mangal (Headings CS)", 20))
+                cancel_button.place(relx=0.08, rely=0.76)
+
+                conformation_tab.mainloop()
+        
+        delete_acc_button = ctk.CTkButton(settings_additional_frame, text="Delete Account", height=35, width=180, corner_radius=30, command=ask_conformation_delete_acc, fg_color="#F45850", hover_color="#C34640")
         delete_acc_button.place(relx=0.70, rely=0.27)
 
     # Logout Button Action
@@ -352,5 +420,3 @@ def successful_login(username, password, user_id):
     goto_home()
     
     main_frame.mainloop()
-
-# successful_login("arjun", "123456", 34)
