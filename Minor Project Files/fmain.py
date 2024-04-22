@@ -1,5 +1,4 @@
 import customtkinter as ctk
-from bmain import sqlserver
 import bmain
 import in_profile
 from PIL import Image, ImageTk
