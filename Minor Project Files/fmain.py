@@ -21,6 +21,7 @@ def main_page():
     pic_lable = ctk.CTkLabel(app, text="", image=picture)
     pic_lable.place(relx=0, rely= 0)
 
+    # Input page for login
     def login_frame():
         lable_login = ctk.CTkFrame(master=app,height=450, width=376, bg_color="#232832", fg_color="#232832", corner_radius=0)
         lable_login.place(relx=0.532, rely=0.0)
@@ -70,8 +71,9 @@ def main_page():
         login_button = ctk.CTkButton(lable_login, text="LOGIN", command=send_user_login)
         login_button.place(relx=0.34, rely=0.67)
     
-    login_frame() # Default Page
+    login_frame() # Default Page ---> (Login Frame)
 
+    # Input for registration data
     def registration():
         lable_registration = ctk.CTkFrame(master=app,height=450, width=376, bg_color="#232832", fg_color="#232832", corner_radius=0)
         lable_registration.place(relx=0.53, rely=0.0)
@@ -79,7 +81,7 @@ def main_page():
         label_21 = ctk.CTkLabel(lable_registration, text="Registration Portal", font=("Berlin Sans FB Demi", 30), width=300)
         label_21.place(relx=0.128, rely=0.03)
 
-        # Username & Password
+        # Username & Password etc. 
         reg_username_entry = ctk.CTkEntry(lable_registration, placeholder_text="Enter Username", height=30, width=280)
         reg_username_entry.place(relx=0.15, rely=0.14)
 
@@ -122,6 +124,8 @@ def main_page():
             
             # For Logs
             print(type(username), type(password), type(email), type(dob), type(age), type(gender), type(height), type(weight), type(user_type))
+            
+            # Sends data to SQL Server (for user registeration)
             mssql.register_user(username=username,password=password,email=email,dob=dob, age=age,
                              gender=gender,height=height,weight=weight,user_type=user_type)
             lable_registration.destroy()
@@ -130,12 +134,14 @@ def main_page():
         # Registration Button
         reg_button = ctk.CTkButton(lable_registration, text="Create Account", command=send_user_reg)
         reg_button.place(relx=0.34, rely=0.92)
-                    
+
+    # Login Page (Frame)
     login_page = ctk.CTkButton(master=app, text_color=("white", "white"), hover_color=("#20242c", "#20242c"),
                                           text="Login",command=login_frame, height=50, width=187.5, bg_color="#0c0e12",
                                           fg_color="transparent", corner_radius=0, font=("Mangal (Headings CS)", 20))
     login_page.place(relx=0.531, rely=0.9)
 
+    # Registration Page (Frame)
     registration_page = ctk.CTkButton(master=app, text_color=("white", "white"), hover_color=("#20242c", "#20242c"),
                                           text="Registration",command=registration, height=50, width=187.5, bg_color="#0c0e12",
                                           fg_color="transparent", corner_radius=0, font=("Mangal (Headings CS)", 20))
