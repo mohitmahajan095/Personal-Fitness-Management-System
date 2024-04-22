@@ -1,4 +1,8 @@
 import serverLogin
+from datetime import datetime, date
+
+current_time = datetime.now().strftime('%H:%M:%S.%f')[:-3]
+todays_date = date.today()
 
 sqlserver = serverLogin.connect()
 sqlserver.autocommit = True
@@ -28,12 +32,35 @@ class SQLManager:
                 print("Login Failed !")
                 return False, user_id
 
-    def track_fitness_activity(self, user_id, activity_type, duration, calories_burned, date):
-        print(user_id, activity_type, duration, calories_burned, date)
+    def track_fitness_activity(self, UserID, activity, duration, calories_burned, current_weight, previous_weight):
+        sql_query = "INSERT INTO fitness_activities (UserID, activity, duration, calories_burned, current_weight, previous_weight, date) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        sqlserver.execute(sql_query, (UserID, activity, duration, calories_burned, current_weight, previous_weight, str(todays_date)))
+        print("\nQuery Executed !\n",UserID, activity, duration, calories_burned, current_weight, previous_weight, str(todays_date))
 
-    def track_food_intake(self, user_id, food_item, quantity, calories_consumed, date):
-        pass
+    def in_fitness_activity_table(self, user_id):
+        rows = sqlserver.execute("SELECT TOP 8 * FROM fitness_activities WHERE UserID = ? ORDER BY activity_id DESC;", (user_id)).fetchall()
+        for i in range(0, len(rows)):
+            print(rows[i])
+            print(f"\nFitness Activity History: {rows}")
+            return rows
+        
+    def track_food_intake(self, UserID, food_name, quantity, CaloriesPerServing , meal_time, date):
+        total_cal = CaloriesPerServing * quantity
+        sql_query = "INSERT INTO food_intakes (UserID, food_name, quantity, calories_intake, meal_time, date, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        sqlserver.execute(sql_query, (UserID, food_name, quantity, total_cal, meal_time, date, current_time))
+        print("\nQuery Executed !\n",UserID, food_name, quantity, total_cal, meal_time, date, current_time)
 
+    def update_weight(self, new_weight, user_id):
+        sqlserver.execute("UPDATE UserProfile SET weight = ? WHERE user_id = ?;", (new_weight, user_id))
+        print(f"Weight Updated to : {new_weight} kg")
+
+    def in_food_intake_table(self, user_id):
+        # rows = sqlserver.execute(f"SELECT * FROM food_intakes WHERE UserID = ? ORDER BY timestamp DESC;", (user_id)).fetchall()
+        rows = sqlserver.execute("SELECT TOP 8 * FROM food_intakes WHERE UserID = ? ORDER BY food_id DESC;", (user_id)).fetchall()
+        for i in range(0, len(rows)):
+            print(rows[i])
+            print(f"\nFood-Intake History: {rows}")
+            return rows
 
     def get_profile_details(self, username):
         sqlserver.execute("SELECT * FROM UserProfile WHERE username = ?", (username))
@@ -52,6 +79,14 @@ class SQLManager:
                 return (user_id, username, password, email, dob, age, gender, height, weight, bmi, user_type)
             else:
                 print("User dosen't exist")
+        
+    def delete_user_acc(self, user_id):
+        sqlserver.execute("DELETE FROM UserProfile WHERE user_id = ?;", (user_id))
+        sqlserver.execute("DELETE FROM fitness_activities WHERE UserID = ?;", (user_id))
+        sqlserver.execute("DELETE FROM food_intakes WHERE UserID = ?;", (user_id))
+        print("User Account & Data Deleted Successfully !")
+
+
 class feature:
     def get_w_h_a_g(username):
         sqlserver.execute("SELECT * FROM UserProfile WHERE username = ?", (username))
@@ -126,26 +161,30 @@ class feature:
             return "Oops you are Overweight"
         else:
             return "Your Weight is Obese"
-        
-    def cal_burned_by_cycling(met_level, weight, duration):
+
+    def cal_burned_by_cycling(self, met_level, weight, duration):
         duration_in_hr = duration/60
         met_value = {"Moderate": 8,
                      "Vigorous": 12}
         met = met_value[met_level]
         cal_burned = (met * weight * duration_in_hr)
         return cal_burned
+    
+    def cal_burned_by_running(self, speed_level, weight, duration):
+       duration_in_hr = duration/60
+       speed_value = {"Moderate": 8.3, "Vigorous": 11.0}
+       calories_burned = (speed_value[speed_level] * weight * duration_in_hr)
+       return calories_burned
 
-    def Total_Calories_Consumed(Quantity, CaloriesPerServing):
-         pass
-
-    def Weight_Loss_Progress(InitialWeight, CurrentWeight):
-       pass
-
-
-####################################################################################################################################################################
-# mssql_ = sql()
-# mssql_.register_user(username="mohit", password="aws555", email="mohit@email.com", dob="2004-02-09", age=20, gender="Male", weight=57, height=183, user_type="User")
-# mssql_.login_user(in_username, in_password)
-# ab = sql()
-# # a,b,c,d,e,f,g,h,i,j = ab.profile_details("mohitmahajan")
-# print(ab.profile_details("mohitmahajan"))
+    
+    def total_calories_consumed(self, user_id, date):
+        query = f"SELECT calories_intake FROM food_intakes WHERE date = '{date}' AND UserID = '{user_id}';"
+        rows = sqlserver.execute(query).fetchall()
+        ttl_calories_consumed = sum(row[0] for row in rows)
+        return ttl_calories_consumed
+    
+    def total_calories_burned(self,user_id, date):
+        query = f"SELECT calories_burned FROM fitness_activities WHERE date = '{date}' AND UserID = '{user_id}';"
+        rows = sqlserver.execute(query).fetchall()
+        ttl_calories_burned = sum(row[0] for row in rows)
+        return ttl_calories_burned
