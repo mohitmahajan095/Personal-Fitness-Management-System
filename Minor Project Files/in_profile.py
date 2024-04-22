@@ -6,8 +6,8 @@ import datetime
 import os
 
 # Theme 
-# c1 = "#181c1c"
-# c2 = "#30343c"
+# c1 = "#232832"
+# c2 = "#15181e"
 
 # Executes after successful login only !
 def successful_login(username, password, user_id):
@@ -35,8 +35,7 @@ def successful_login(username, password, user_id):
     _icon_lable = ctk.CTkLabel(master=side_frame, text="",image=app_icon)
     _icon_lable.place(relx=0, rely=0.0)
 
-
-
+ 
     # Home Button Action
     def goto_home():
         home_frame = ctk.CTkFrame(master=main_frame,height=1000, width=790, bg_color="#232832", fg_color="#232832", corner_radius=0)
@@ -155,7 +154,6 @@ def successful_login(username, password, user_id):
                                    text_color="white", border_color="#0c0e12", corner_radius=10)
         current_weight.place(relx=0.52, rely=0.55)
 
-
         def ft_send_data():
             met_level = str(MET_level.get())
             weight_now = int(current_weight.get())
@@ -184,7 +182,8 @@ def successful_login(username, password, user_id):
 
         ft_table = CTkTable(master=ft_additional_frame_2, row=1, column=7, justify="center", width=97, font=("Berlin Sans FB", 14), colors=("#2f3333", "#464949"))
         ft_table.pack(expand=True, fill="both", padx=20, pady=20)
-        
+
+        # Generate Table In Your Activities
         def generate_ft_activity_table():
             ft_table_data = ms_sql.in_fitness_activity_table(user_id)
             print(ft_table_data)
@@ -196,6 +195,7 @@ def successful_login(username, password, user_id):
             ft_table.insert(row=0, column=i, value=ft_column_list[i])
         generate_ft_activity_table()
 
+ 
     # Food Intake Button Action
     def food_intake():
         fi_frame = ctk.CTkFrame(master=main_frame, height=1000, width=790, bg_color="#232832", fg_color="#232832", corner_radius=0)
@@ -229,9 +229,9 @@ def successful_login(username, password, user_id):
                                    border_width=1.5, bg_color="transparent", fg_color="#0c0e12",
                                    text_color="white", border_color="#0c0e12", corner_radius=10)
         calories_per_serving.place(relx=0.52, rely=0.55)
-        
-        def fi_send_data():
 
+        # Sends Data To SQL Server
+        def fi_send_data():
             send_food_name = str(food_name.get())
             send_quantity = int(food_quantity.get())
             send_CaloriesPerServing= int(calories_per_serving.get())
@@ -263,8 +263,7 @@ def successful_login(username, password, user_id):
 
         generate_fi_table()
 
-
-
+ 
     def push_get_profile():
         get_profile(username)
 
@@ -342,6 +341,7 @@ def successful_login(username, password, user_id):
         delete_acc_label = ctk.CTkLabel(settings_additional_frame, text=f"Delete your account : ", font=("Berlin Sans FB", 25), width=0, fg_color="transparent", bg_color="transparent")
         delete_acc_label.place(relx=0.045, rely=0.3)
 
+        # Pops up a frame (asking for conformation to delete account & it's data)
         def ask_conformation_delete_acc():
                 conformation_tab = ctk.CTk()
                 conformation_tab.title(f"Really wanna say good bye {username} ?")
