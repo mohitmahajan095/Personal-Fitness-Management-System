@@ -427,27 +427,27 @@ def successful_login(username, password, user_id):
     your_activities_button = ctk.CTkButton(master=side_frame, text_color=("white", "white"), hover_color=("#20242c", "#20242c"),
                                           text="Your Activities",command=fitness_activities, height=50, width=245, bg_color="#0c0e12",
                                           fg_color="transparent", corner_radius=10, font=(button_font_family, 20))
-    your_activities_button.place(relx=0.012, rely=0.155)
+    your_activities_button.place(relx=0.012, rely=0.158)
 
     food_intake_button = ctk.CTkButton(master=side_frame, text_color=("white", "white"), hover_color=("#20242c", "#20242c"),
                                           text=" Food Intake",command=food_intake, height=50, width=245, bg_color="#0c0e12",
                                           fg_color="transparent", corner_radius=10, font=(button_font_family, 20))
-    food_intake_button.place(relx=0.012, rely=0.205)
+    food_intake_button.place(relx=0.012, rely=0.211)
 
     profile_button = ctk.CTkButton(master=side_frame, text_color=("white", "white"), hover_color=("#20242c", "#20242c"),
                                           text="Profile",command=push_get_profile, height=50, width=245, bg_color="#0c0e12",
                                           fg_color="transparent", corner_radius=10, font=(button_font_family, 20))
-    profile_button.place(relx=0.012, rely=0.6)
+    profile_button.place(relx=0.012, rely=0.595)
 
     setting_button = ctk.CTkButton(master=side_frame, text_color=("white", "white"), hover_color=("#20242c", "#20242c"),
                                           text="Settings",command=settings, height=50, width=245, bg_color="#0c0e12",
                                           fg_color="transparent", corner_radius=10, font=(button_font_family, 20))
-    setting_button.place(relx=0.012, rely=0.65)
+    setting_button.place(relx=0.012, rely=0.648)
 
     logout_button = ctk.CTkButton(master=side_frame, text_color=("white", "white"), hover_color=("#20242c", "#20242c"),
                                           text="Logout",command=logout, height=50, width=245, bg_color="#0c0e12",
                                           fg_color="transparent", corner_radius=10, font=(button_font_family, 20))
-    logout_button.place(relx=0.012, rely=0.7)
+    logout_button.place(relx=0.012, rely=0.701)
     
     # Default Page (--->> Home Page)
     goto_home()
