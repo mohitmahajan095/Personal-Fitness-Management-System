@@ -25,4 +25,4 @@ To use this appliction, you will need to install the required library before run
 
 `pip3 install -r requirements.txt`
 
-# Disclaimer: This project is solely intended for academic purposes and may not be suitable for production environments without further modifications and security enhancements.
+# Disclaimer:                                                                                                                                                                  This project is solely intended for academic purposes and may not be suitable for production environments without further modifications and security enhancements.
