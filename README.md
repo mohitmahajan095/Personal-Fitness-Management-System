@@ -21,7 +21,7 @@ The Personalised Fitness Management System (unique to the user) aims to address 
 5. **Server Hosting:** Microsoft SQL Server 2014
 
 # Install Required Libraries                     
-To use this script, you will need to install the required library. You can do this using pip3:
+To use this appliction, you will need to install the required library before running the python file. You can do this using pip3:
 
 `pip3 install -r requirements.txt`
 
