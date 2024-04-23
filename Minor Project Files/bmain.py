@@ -38,7 +38,7 @@ class SQLManager:
         print("\nQuery Executed !\n",UserID, activity, duration, calories_burned, current_weight, previous_weight, str(todays_date))
 
     def in_fitness_activity_table(self, user_id):
-        rows = sqlserver.execute("SELECT TOP 8 * FROM fitness_activities WHERE UserID = ? ORDER BY activity_id DESC;", (user_id)).fetchall()
+        rows = sqlserver.execute("SELECT TOP 7 * FROM fitness_activities WHERE UserID = ? ORDER BY activity_id DESC;", (user_id)).fetchall()
         for i in range(0, len(rows)):
             print(rows[i])
             print(f"\nFitness Activity History: {rows}")
@@ -56,7 +56,7 @@ class SQLManager:
 
     def in_food_intake_table(self, user_id):
         # rows = sqlserver.execute(f"SELECT * FROM food_intakes WHERE UserID = ? ORDER BY timestamp DESC;", (user_id)).fetchall()
-        rows = sqlserver.execute("SELECT TOP 8 * FROM food_intakes WHERE UserID = ? ORDER BY food_id DESC;", (user_id)).fetchall()
+        rows = sqlserver.execute("SELECT TOP 7 * FROM food_intakes WHERE UserID = ? ORDER BY food_id DESC;", (user_id)).fetchall()
         for i in range(0, len(rows)):
             print(rows[i])
             print(f"\nFood-Intake History: {rows}")
