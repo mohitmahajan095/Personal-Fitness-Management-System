@@ -7,11 +7,11 @@
 The Personalised Fitness Management System (unique to the user) aims to address the growing need for efficient management of personal fitness routines and health data. With the rise of health consciousness and the adoption of fitness activities, individuals often struggle to organize and track their fitness goals, routines, and progress effectively. This system will provide a comprehensive solution to manage fitness data efficiently, helping users monitor their progress and achieve their health objectives more effectively.
 
 # Objectives
-1. Develop a robust database management system to store and manage user fitness data securely.
-2. Implement user-friendly interfaces for users to input and track their fitness activities, and food-intake.
-3. Monitoring calorie consumption in both exercise records and dietary intake.
-4. Integrate features for generating personalized workout plans and nutritional guidance based on user preferences and goals.
-5. Provide data analysis tools to visualize progress trends, identify areas for improvement, and set realistic goals.
+1. Create a secure and efficient database management system for storing and handling user fitness data.
+2. Design intuitive interfaces for users to input and monitor their fitness activities and dietary intake.
+3. Track calorie expenditure from exercise records and food consumption.
+4. Incorporate functionalities for managing workout routines, food intake, and calorie tracking based on user preferences and objectives.
+5. Offer data analysis tools for visualizing progress trends, pinpointing areas for enhancement, and establishing achievable goals.
 
 # Technologies/Frameworks
 1. **Database Management System:** MySQL
@@ -25,5 +25,5 @@ To use this script, you will need to install the required library. You can do th
 
 `pip3 install -r requirements.txt`
 
-**Disclaimer:**
+# Disclaimer:
 This project is solely intended for academic purposes and may not be suitable for production environments without further modifications and security enhancements.
