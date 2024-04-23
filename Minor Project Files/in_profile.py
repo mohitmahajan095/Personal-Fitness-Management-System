@@ -38,6 +38,13 @@ def successful_login(username, password, user_id):
  
     # Home Button Action
     def goto_home():
+     
+        home_button.configure(fg_color=("#20242c", "#20242c"))
+        your_activities_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        food_intake_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        setting_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        profile_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+     
         home_frame = ctk.CTkFrame(master=main_frame,height=1000, width=790, bg_color="#232832", fg_color="#232832", corner_radius=0)
         home_frame.place(relx=0.25,rely=0)
 
@@ -119,7 +126,13 @@ def successful_login(username, password, user_id):
 
     # Activity Button Action
     def fitness_activities():
-        
+     
+        home_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        your_activities_button.configure(fg_color=("#20242c", "#20242c"))
+        food_intake_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        setting_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        profile_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+     
         ft_frame = ctk.CTkFrame(master=main_frame, height=1000, width=790, bg_color="#232832", fg_color="#232832", corner_radius=0)
         ft_frame.place(relx=0.25,rely=0)
         
@@ -198,6 +211,12 @@ def successful_login(username, password, user_id):
  
     # Food Intake Button Action
     def food_intake():
+        home_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        your_activities_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        food_intake_button.configure(fg_color=("#20242c", "#20242c"))
+        setting_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        profile_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+
         fi_frame = ctk.CTkFrame(master=main_frame, height=1000, width=790, bg_color="#232832", fg_color="#232832", corner_radius=0)
         fi_frame.place(relx=0.25,rely=0)
 
@@ -268,6 +287,13 @@ def successful_login(username, password, user_id):
         get_profile(username)
 
     def get_profile(username):
+     
+        home_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        your_activities_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        food_intake_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        setting_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        profile_button.configure(fg_color=("#20242c", "#20242c"))
+     
         try:
             user_info = ms_sql.get_profile_details(username=username)
         except Exception as e:
@@ -328,6 +354,13 @@ def successful_login(username, password, user_id):
 
     # Settings Button Action
     def settings():
+        
+        home_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        your_activities_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        food_intake_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        setting_button.configure(fg_color=("#20242c", "#20242c"))
+        profile_button.configure(fg_color=("#0c0e12", "#0c0e12"))
+        
         settings_frame = ctk.CTkFrame(master=main_frame, height=1000, width=790, bg_color="#232832", fg_color="#232832", corner_radius=0)
         settings_frame.place(relx=0.25,rely=0)
 
