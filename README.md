@@ -25,5 +25,5 @@ To use this script, you will need to install the required library. You can do th
 
 `pip3 install -r requirements.txt`
 
-# Disclaimer:
+# Disclaimer
 This project is solely intended for academic purposes and may not be suitable for production environments without further modifications and security enhancements.
