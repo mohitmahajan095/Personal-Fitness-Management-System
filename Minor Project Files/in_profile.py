@@ -19,7 +19,7 @@ def successful_login(username, password, user_id):
     
     main_frame = ctk.CTk()
     main_frame.title(f"Home - Welcome back {username} !")
-    main_frame.geometry("1000x755")
+    main_frame.geometry("1000x760")
     button_font_family = "Mangal (Headings CS)"
     
     weight, height, age, gender = bmain.feature.get_w_h_a_g(username=username)    # To get weight, height, age & gender of user from database
