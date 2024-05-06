@@ -29,7 +29,7 @@ To use this appliction, you will need to install the required library before run
 * Mohit Mahajan - [@mohitmahajan095](https://github.com/mohitmahajan095 "Mohit's Github Profile")
 * Mahadev Ambre - [@MahadevAmbre](https://github.com/MahadevAmbre "Mahadev's Github Profile")
   
-# Disclaimer: This project is solely intended for academic purposes and may not be suitable for production environments without further modifications and security enhancements.
+# ⚠️ Note: This project was solely intended for academic purposes only !
 
 # GUI Output & Results:
 **1. Login Page:**
