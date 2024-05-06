@@ -32,3 +32,42 @@ To use this appliction, you will need to install the required library before run
 # Disclaimer: This project is solely intended for academic purposes and may not be suitable for production environments without further modifications and security enhancements.
 
 # GUI Output & Results:
+**1. Login Page: **
+<p align="center">
+  <img src="https://github.com/mohitmahajan095/Personal-Fitness-Management-System/blob/82e3ca2a9b11a5f1b0538c3578b23d2984787f7a/Minor%20Project%20Files/Output%20Images/login_page.png" />
+</p>
+
+**2. Registration Page: **
+<p align="center">
+  <img src="https://github.com/mohitmahajan095/Personal-Fitness-Management-System/blob/82e3ca2a9b11a5f1b0538c3578b23d2984787f7a/Minor%20Project%20Files/Output%20Images/registration_page.png" />
+</p>
+
+**3. Home Page: **
+<p align="center">
+  <img src="https://github.com/mohitmahajan095/Personal-Fitness-Management-System/blob/82e3ca2a9b11a5f1b0538c3578b23d2984787f7a/Minor%20Project%20Files/Output%20Images/home_page.png" />
+</p>
+
+**4. Food Tracking: **
+<p align="center">
+  <img src="https://github.com/mohitmahajan095/Personal-Fitness-Management-System/blob/82e3ca2a9b11a5f1b0538c3578b23d2984787f7a/Minor%20Project%20Files/Output%20Images/food_intakes_page.png" />
+</p>
+
+**5. Activity Tracking: **
+<p align="center">
+  <img src="https://github.com/mohitmahajan095/Personal-Fitness-Management-System/blob/82e3ca2a9b11a5f1b0538c3578b23d2984787f7a/Minor%20Project%20Files/Output%20Images/your_activities_page.png" />
+</p>
+
+**6. Profile Page: **
+<p align="center">
+  <img src="https://github.com/mohitmahajan095/Personal-Fitness-Management-System/blob/82e3ca2a9b11a5f1b0538c3578b23d2984787f7a/Minor%20Project%20Files/Output%20Images/profile_page.png" />
+</p>
+
+**7. Settings: **
+<p align="center">
+  <img src="https://github.com/mohitmahajan095/Personal-Fitness-Management-System/blob/82e3ca2a9b11a5f1b0538c3578b23d2984787f7a/Minor%20Project%20Files/Output%20Images/settings_page.png" />
+</p>
+
+**8. Delete Account Warning: **
+<p align="center">
+  <img src="https://github.com/mohitmahajan095/Personal-Fitness-Management-System/blob/82e3ca2a9b11a5f1b0538c3578b23d2984787f7a/Minor%20Project%20Files/Output%20Images/settings_warning_page.png" />
+</p>
