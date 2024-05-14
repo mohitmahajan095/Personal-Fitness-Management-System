@@ -170,5 +170,3 @@ def main_page():
     registration_page.place(relx=0.7657, rely=0.9)
 
     app.mainloop()
-
-main_page()
