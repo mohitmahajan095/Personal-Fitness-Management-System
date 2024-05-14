@@ -23,6 +23,7 @@ SOFTWARE. """""
 import customtkinter as ctk
 from CTkTable import CTkTable
 import bmain
+import fmain
 from PIL import Image, ImageTk
 import datetime
 import os
@@ -416,6 +417,8 @@ def successful_login(username, password, user_id):
                 def delete_acc():
                         ms_sql.delete_user_acc(user_id=user_id)
                         main_frame.destroy()
+                        conformation_tab.destroy()
+                        fmain.main_page()
                     
                 def cancel():
                         conformation_tab.destroy()
