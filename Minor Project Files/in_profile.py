@@ -442,6 +442,8 @@ def successful_login(username, password, user_id):
     def logout():
             main_frame.destroy()
             print("Logged Out !")
+            fmain.main_page()
+
  
     # Buttons Structure (Arranged)
     home_button = ctk.CTkButton(master=side_frame, text_color=("white", "white"), hover_color=("#20242c", "#20242c",),
