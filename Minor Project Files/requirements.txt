@@ -1,4 +1,4 @@
 customtkinter==0.3
-PIL==10.3.0
+pillow==10.3.0
 CTkTable
 pyodbc==5.1.0
