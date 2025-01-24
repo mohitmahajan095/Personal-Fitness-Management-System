@@ -13,7 +13,7 @@ The Personalised Fitness Management System (unique to the user) aims to address 
 4. Incorporate functionalities for managing workout routines, food intake, and calorie tracking based on user preferences and objectives.
 5. Offer data analysis tools for visualizing progress trends, pinpointing areas for enhancement, and establishing achievable goals.
 
-# Technologies/Frameworks
+# Technologie/Frameworks
 1. **Database Management System:** MySQL
 2. **Programming Language:** Python
 3. **Frontend Development (GUI):** Python (Tkinter & Custom Tkinter)
