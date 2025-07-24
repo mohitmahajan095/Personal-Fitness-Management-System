@@ -28,8 +28,6 @@ To use this appliction, you will need to install the required library before run
 # Collaborators
 * Mohit Mahajan - [@mohitmahajan095](https://github.com/mohitmahajan095 "Mohit's Github Profile")
 * Mahadev Ambre - [@MahadevAmbre](https://github.com/MahadevAmbre "Mahadev's Github Profile")
-  
-# Note: This project was solely intended for academic purposes only! (⚠)
 
 # GUI Output & Results:
 **1. Login Page:**
