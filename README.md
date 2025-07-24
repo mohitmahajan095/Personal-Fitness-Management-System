@@ -6,14 +6,12 @@
 
 The Personalised Fitness Management System (unique to the user) aims to address the growing need for efficient management of personal fitness routines and health data. With the rise of health consciousness and the adoption of fitness activities, individuals often struggle to organize and track their fitness goals, routines, and progress effectively. This system will provide a comprehensive solution to manage fitness data efficiently, helping users monitor their progress and achieve their health objectives more effectively.
 
-# Objectives
-1. Create a secure and efficient database management system for storing and handling user fitness data.
-2. Design intuitive interfaces for users to input and monitor their fitness activities and dietary intake.
-3. Track calorie expenditure from exercise records and food consumption.
-4. Incorporate functionalities for managing workout routines, food intake, and calorie tracking based on user preferences and objectives.
-5. Offer data analysis tools for visualizing progress trends, pinpointing areas for enhancement, and establishing achievable goals.
+# Features
+1. Track calorie expenditure from exercise records and food consumption.
+2. Incorporate functionalities for managing workout routines, food intake, and calorie tracking based on user preferences and objectives.
+3. Offer data analysis tools for visualizing progress trends, pinpointing areas for enhancement, and establishing achievable goals.
 
-# Technologie/Frameworks
+# Technology/Frameworks
 1. **Database Management System:** MySQL
 2. **Programming Language:** Python
 3. **Frontend Development (GUI):** Python (Tkinter & Custom Tkinter)
