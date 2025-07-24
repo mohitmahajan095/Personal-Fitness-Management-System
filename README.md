@@ -9,7 +9,7 @@ The Personalised Fitness Management System (unique to the user) aims to address 
 # Features
 1. Track calorie expenditure from exercise records and food consumption.
 2. Incorporate functionalities for managing workout routines, food intake, and calorie tracking based on user preferences and objectives.
-3. Offer data analysis tools for visualizing progress trends, pinpointing areas for enhancement, and establishing achievable goals.
+3. Data analysis tools for visualizing progress trends, pinpointing areas for enhancement, and establishing achievable goals.
 
 # Technology/Frameworks
 1. **Database Management System:** MySQL
